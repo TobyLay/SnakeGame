@@ -1,20 +1,15 @@
 #pragma once
-
 #include <iostream>
 #include <conio.h>
 using namespace std;
 
-
+//Define Arrow Key Inputs
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_LEFT 75
 #define KEY_RIGHT 77
 
-//World Params
-const int width = 20;
-const int height = 10;
-enum eFacing { SPAWN = 0, LEFT, RIGHT, UP, DOWN };
-eFacing dir;
+extern enum dir;
 
 class Snake {
 public:
@@ -22,6 +17,7 @@ public:
 	int snakeY;
 	int snakeSize;
 	bool dead;
+	int snakeTailX[10], snakeTailY[10];
 
 	Snake();
 	

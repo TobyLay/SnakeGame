@@ -1,62 +1,26 @@
-#include "Snake.h"
+#include "World.h"
 
 
-//Food Parameters
-int foodX, foodY;
 
 //Runs when game starts
-void Setup()
-{
-	foodX = rand() % width;
-	foodY = rand() % height;
-}
-
-//Draw Snake, Borders and Food
-void Draw(Snake& s)
-{
-	system("cls");
-	
-	
-	for (int i = 0; i < width + 2; i++)
-		cout << "#";
-	cout << endl;
-
-	
-	for (int i = 0; i < height; i++)
-	{
-		for (int l = 0; l < width; l++)
-		{
-			if (l == 0)
-				cout << "#";
-			if (i == s.snakeY & l == s.snakeX)
-				cout << "1";
-
-			else if (i == foodX && l == foodX)
-				cout << "0";
-			else
-				cout << " ";
-
-			if (l == width - 1)
-				cout << "#";
-		}
-		cout << endl;
-	}
-
-	
-	for (int i = 0; i < width + 2; i++)
-		cout << "#";
-	cout << endl;
-}
-
-
 
 int main()
 {
+	World w;
 	Snake s;
-	Setup();
+	Food f;
+	
+	s.snakeX = w.width / 2;
+	s.snakeY = w.height / 2;
+	f.worldHeight = w.height;
+	f.worldWidth = w.width;
+	f.SpawnFood(f);
+	
+	
 	while (!s.dead)
 	{
-		Draw(s);
+		w.Collision(s, f);
+		w.Draw(s, f);
 		s.input(s);
 		s.movement(s);
 	}
